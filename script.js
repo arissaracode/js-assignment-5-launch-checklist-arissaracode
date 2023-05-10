@@ -1,4 +1,4 @@
-// Write your JavaScript code here!
+// Write your JavaScript code here !
 
 let fuelLevelReady = false;
 let cargoLevelReady = false;
