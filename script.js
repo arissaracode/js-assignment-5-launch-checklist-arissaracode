@@ -1,38 +1,44 @@
-// Write your JavaScript code here !
+//const {myFetch, formSubmission} = require("./scriptHelper");
 
-let fuelLevelReady = false;
-let cargoLevelReady = false;
-let fieldCheck = false;
 
-window.addEventListener("load", function () {
+// Write your JavaScript code here!
 
-    let listedPlanetResponse = myFetch();
+window.addEventListener("load", function() {
 
-    listedPlanetResponse.then(function (result) {
-        result.json().then(function (json) {
-
-            let selectedPlanet = pickPlanet(json);
-
-            addDestinationInfo(selectedPlanet, document)
-        })
-
+    let listedPlanets;
+    // Set listedPlanetsResponse equal to the value returned by calling myFetch()
+    let listedPlanetsResponse = myFetch();
+    listedPlanetsResponse;
+    listedPlanetsResponse.then(function (result) {
+        listedPlanets = result;
+        console.log(listedPlanets);
+    }).then(function () {
+        console.log(listedPlanets);
+       let selectedPlanet = pickPlanet(listedPlanets);
+       addDestinationInfo(document, selectedPlanet.name, selectedPlanet.diameter, selectedPlanet.star,selectedPlanet.distance, selectedPlanet.moons, selectedPlanet.image)
+ 
+        // Below this comment call the appropriate helper functions to pick a planet 
+        //from the list of planets and add that information to your destination.
     })
-    let form = document.querySelector("form");
-    form.addEventListener("submit", function () {
-    event.preventDefault();
-
-
-    let pilotNameInput = document.querySelector("input[name=pilotName]");
-    let coPilotNameInput = document.querySelector("input[name=copilotName]");
-    let fuelLevelInput = document.querySelector("input[name=fuelLevel]");
-    let cargoMassInput = document.querySelector("input[name=cargoMass]");
-    let pilot = pilotNameInput.value ;
-    let copilot = coPilotNameInput.value;
-    let fuel = fuelLevelInput.value;
-    let cargo = cargoMassInput.value;
-    let list = document.getElementById("faultyItems");
-    formSubmission(document,list,pilot,copilot,fuel,cargo)
-
-    })
-
-});
+      
+   let list = document.getElementById("faultyItems");
+   list.style.visibility = "hidden";
+ 
+   let form = document.querySelector("form");
+   form.addEventListener("submit", function(event){
+     event.preventDefault();
+     let pilot = document.querySelector("input[name=pilotName]").value;
+     let copilot = document.querySelector("input[name=copilotName]").value;
+     let fuelLevel = document.querySelector("input[name=fuelLevel]").value;
+     let cargoLevel = document.querySelector("input[name=cargoMass]").value;
+ 
+     formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel)
+   
+ 
+   })
+   
+   
+ 
+ }); 
+ 
+ 
